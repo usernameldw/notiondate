@@ -8,7 +8,7 @@
         font-size: 18pt;
         color: #ff5757;
         padding: 5px;
-        border: 1px solid #ffffff;
+        border: 1px solid #191919;
         justify-content: left;
         line-height: 1.5;
         height:85%;
@@ -27,7 +27,7 @@
       }
 
       body{
-          background-color: #ffffff;
+          background-color: #191919;
       }
     </style>
 </head>
@@ -45,8 +45,8 @@
     weekday[5] = "sexta";
     weekday[6] = "sábado";
 
-    const monthNames = ["january", "february", "march", "april", "may", "june",
-      "july", "august", "september", "october", "november", "december"
+    const monthNames = ["janeiro", "fevereiro", "março", "abril", "maio", "junho",
+      "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
     ];
 
     
@@ -58,11 +58,11 @@
     var greet;
 
     if (hrs < 12)
-        greet = 'good morning, Jonathan.  ';
+        greet = 'bom dia, jonathan.  ';
     else if (hrs >= 12 && hrs <= 17)
-        greet = 'good afternoon, Jonathan. ';
+        greet = 'boa tarde, jonathan. ';
     else if (hrs >= 17 && hrs <= 24)
-        greet = 'good evening, Jonathan.  ';
+        greet = 'boa noite, jonathan.  ';
 
     document.getElementById('lbl').innerHTML = `
         <div class="container">
