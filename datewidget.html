@@ -62,13 +62,11 @@
 
     var greet;
 
-    if (hrs < 6)
-        greet = 'Bom noite, Jonathan!  ';
-    else if (hrs >= 6 && hrs <= 12)
-        greet = 'Boa dia, Jonathan! ';
-    else if (hrs >= 12 && hrs <= 17)
+    if (hrs >= 6 && hrs < 12)
+        greet = 'Bom dia, Jonathan!  ';
+    else if (hrs >= 12 && hrs < 17)
         greet = 'Boa tarde, Jonathan! ';
-    else if (hrs >= 17 && hrs <= 24)
+    else if (hrs >= 17 && hrs < 6)
         greet = 'Boa noite, Jonathan!  ';
 
     document.getElementById('lbl').innerHTML = `
