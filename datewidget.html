@@ -1,82 +1,131 @@
-<html> 
+<!DOCTYPE html>
+<html lang="pt">
 <head>
-    <title>Mensagem de saudação</title> 
-    <style>
-      #lbl {
-        display: flex;
-        font-family: sans-serif;
-        font-size: 18pt;
-        color: #d3d3d3;
-        border: 1px solid #191919;
-        justify-content: flex-start;
-        height: 100%;
-        line-height: 1.5;
-        font-weight: bold;
-        flex-direction: column;
-        overflow: hidden;
-      }
-        
-      ::-webkit-scrollbar {
-         display: none;
-       }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cabeçalho</title>
+  <style>
 
-      #container {
-        display: flex;
-        align-items: flex-start;
-      }
+body {
+  background-color: #191919;
+  margin: 0px;
+}
 
-      #date{
-          font-size:12pt;
-          font-weight: bold;
-      }
+#clock {
+  display: flex;
+  font-family: sans-serif;
+  font-size: 22pt;
+  color: #d3d3d3;
+  border: 1px solid #191919;
+  justify-content: flex-start;
+  height: 100%;
+  line-height: 1.5;
+  font-weight: bold;
+  flex-direction: column;
+  overflow: hidden;
+}
 
-      body{
-          background-color: #191919;
-          margin: 0px;
-      }
-       
-    </style>
+#container {
+  display: flex;
+  align-items: flex-start;
+}
+
+#date{
+  font-size:12pt;
+  font-weight: bold;
+}
+
+#greeting{
+  font-size:15pt;
+  font-weight: bold;
+}
+
+  </style>
 </head>
 <body>
-    <div id="lbl"></div>
-</body>
+
+<div id="clock">
+  <div id="date-time"></div>
+</div>
 
 <script>
-    var weekday = new Array(7);
-    weekday[0] = "Domingo";
-    weekday[1] = "Segunda-feira";
-    weekday[2] = "Terça-feira";
-    weekday[3] = "Quarta-feira";
-    weekday[4] = "Quinta-feira";
-    weekday[5] = "Sexta-feira";
-    weekday[6] = "Sábado";
 
-    const monthNames = ["janeiro", "fevereiro", "março", "abril", "maio", "junho",
-      "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+window.addEventListener("load", () => {
+  clock();
+  function clock() {
+    const today = new Date();
+
+    // obter componentes de tempo
+    const hours = today.getHours();
+    const minutes = today.getMinutes();
+    const seconds = today.getSeconds();
+
+    // adicione '0' a hora, minuto e segundo quando forem menos de 10
+    const hour = hours < 10 ? "0" + hours : hours;
+    const minute = minutes < 10 ? "0" + minutes : minutes;
+    const second = seconds < 10 ? "0" + seconds : seconds;
+
+    // obter componentes de data
+    const month = today.getMonth();
+    const weekday = today.getDay();
+    const year = today.getFullYear();
+    const day = today.getDate();
+
+    const weeklist = [
+      "Domingo",
+      "Segunda-feira",
+      "Terça-feira",
+      "Quarta-feira",
+      "Quinta-feira",
+      "Sexta-feira",
+      "Sábado"
     ];
 
-    
-    var today = new Date();
-    var hrs = today.getHours();
-    var dayOfWeek = weekday[today.getDay()];
-    var date = `${dayOfWeek}, ${today.getDate()} de ${monthNames[today.getMonth()]} de ${today.getFullYear()}`;
+    // declarando uma lista de todos os meses em um ano
+    const monthList = [
+      "janeiro",
+      "fevereiro",
+      "março",
+      "abril",
+      "maio",
+      "junho",
+      "julho",
+      "agosto",
+      "setembro",
+      "outubro",
+      "novembro",
+      "dezembro"
+    ];
 
+    // obter data e hora atuais
+    const time = hours + ":" + minute + ":" + second;
+    const date = weeklist[weekday] + ", " + day + " de " + monthList[month] + " de " + year;
     var greet;
 
-    if (hrs < 6)
+    if (hours < 6)
         greet = 'Boa noite, Jonathan!  ';
-    else if (hrs >= 6 && hrs <= 12)
+    else if (hours >= 6 && hours <= 12)
         greet = 'Bom dia, Jonathan! ';
-    else if (hrs >= 12 && hrs <= 17)
+    else if (hours >= 12 && hours <= 17)
         greet = 'Boa tarde, Jonathan! ';
-    else if (hrs >= 17 && hrs <= 24)
+    else if (hours >= 17 && hours <= 24)
         greet = 'Boa noite, Jonathan!  ';
 
-    document.getElementById('lbl').innerHTML = `
+    // imprimir data e hora atuais para o DOM
+    document.getElementById('date-time').innerHTML = `
+
         <div class="container">
+          <div class="time">${time}</div>
           <div id="date"> ${date}</div>
-          <div class="greeting">${greet}</div>
+          <div id="greeting">${greet}</div>
         <div/>
-    `;
+
+  `
+    setTimeout(clock, 1000);
+  }
+});
+
 </script>
+</body>
 </html>
