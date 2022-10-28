@@ -21,7 +21,7 @@
 
         display: flex;
         font-family: sans-serif;
-        font-size: 13pt;
+        font-size: 18pt;
         color: #d3d3d3;
         border: 1px solid #191919;
         justify-content: flex-start;
@@ -42,7 +42,7 @@
 
       #data {
 
-        font-size: 13pt;
+        font-size: 15pt;
         font-weight: bold;
         color: #d3d3d3;
 
@@ -52,15 +52,6 @@
 
         font-size: 13pt;
         font-weight: bold;
-        color: #d3d3d3;
-
-      }
-
-      #tópico {
-
-        display: inline-block;
-        font-size: 13pt;
-        font-weight: normal;
         color: #d3d3d3;
 
       }
@@ -144,9 +135,8 @@
           };
 
           // obter data e hora atuais
-          const semanaNo = " Semana " + new Date().getWeekNumber();
-          const data = semanaLista[semana] + ", " + dia + " de " + mêsLista[mês] + " de " + ano;
-          const tempo = hora + ":" + minuto + ":" + segundo;
+          const semanaNo = semanaLista[semana] + ", " + " semana " + new Date().getWeekNumber() + " de " + ano;
+          const data = dia + " de " + mêsLista[mês] + ", " + hora + ":" + minuto + ":" + segundo;;
 
           if (horas < 6)
             saudar = 'Boa noite, Jonathan!  ';
@@ -160,20 +150,23 @@
           // imprimir data e hora atuais para o DOM
           document.getElementById('data-tempo').innerHTML = `
           <div class="container">
+
             <div id="semanaNo">
+
               ${semanaNo}
+
             </div>
+
             <div id="data">
+
               ${data}
+
             </div>
-            <div class="tempo">
-              ${tempo}
-              <div id="tópico">
-                ${tópico}
-              </div>
-              ${saudar}
-            </div>
+
+            ${saudar}
+
           <div/>
+
           `
           setTimeout(relógio, 1000);
 
