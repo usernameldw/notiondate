@@ -42,7 +42,7 @@
 
       #data {
 
-        font-size: 15pt;
+        font-size: 18pt;
         font-weight: bold;
         color: #d3d3d3;
 
@@ -138,14 +138,7 @@
           const semanaNo = semanaLista[semana] + ", " + new Date().getWeekNumber() + "° " + " semana " + " de " + ano;
           const data = dia + " de " + mêsLista[mês] + ", " + hora + ":" + minuto + ":" + segundo;;
 
-          if (horas < 6)
-            saudar = 'Boa noite, Jonathan!  ';
-          else if (horas >= 6 && horas <= 12)
-            saudar = 'Bom dia, Jonathan! ';
-          else if (horas >= 12 && horas <= 17)
-            saudar = 'Boa tarde, Jonathan! ';
-          else if (horas >= 17 && horas <= 24)
-            saudar = 'Boa noite, Jonathan!  ';
+
 
           // imprimir data e hora atuais para o DOM
           document.getElementById('data-tempo').innerHTML = `
@@ -156,8 +149,9 @@
             <div id="data">
               ${data}
             </div>
-            ${saudar}
+
           <div/>
+
           `
           setTimeout(relógio, 1000);
 
