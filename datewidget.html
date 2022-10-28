@@ -44,7 +44,7 @@
 
         font-size: 12pt;
         font-weight: bold;
-        color: #5a5a5a;
+        color: #d3d3d3;
 
       }
 
@@ -122,13 +122,13 @@
           var saudar;
 
           if (horas < 6)
-            saudar = ' - Boa noite, Jonathan!  ';
+            saudar = ' • Boa noite, Jonathan!  ';
           else if (horas >= 6 && horas <= 12)
-            saudar = ' - Bom dia, Jonathan! ';
+            saudar = ' • Bom dia, Jonathan! ';
           else if (horas >= 12 && horas <= 17)
-            saudar = ' - Boa tarde, Jonathan! ';
+            saudar = ' • Boa tarde, Jonathan! ';
           else if (horas >= 17 && horas <= 24)
-            saudar = ' - Boa noite, Jonathan!  ';
+            saudar = ' • Boa noite, Jonathan!  ';
 
           // imprimir data e hora atuais para o DOM
           document.getElementById('data-tempo').innerHTML = `
