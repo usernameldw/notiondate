@@ -48,6 +48,15 @@
 
       }
 
+      #tópico {
+
+        display: inline-block;
+        font-size: 12pt;
+        font-weight: bold;
+        color: #5a5a5a;
+
+      }
+
     </style>
 
   </head>
@@ -84,6 +93,7 @@
           const semana = hoje.getDay();
           const ano = hoje.getFullYear();
           const dia = hoje.getDate();
+          const tópico = " • "
 
           // declarando uma lista de todos os dias da semana
           const semanaLista = [
@@ -119,16 +129,15 @@
           // obter data e hora atuais
           const data = semanaLista[semana] + ", " + dia + " de " + mêsLista[mês] + " de " + ano;
           const tempo = horas + ":" + minuto + ":" + segundo;
-          var saudar;
 
           if (horas < 6)
-            saudar = ' • Boa noite, Jonathan!  ';
+            saudar = 'Boa noite, Jonathan!  ';
           else if (horas >= 6 && horas <= 12)
-            saudar = ' • Bom dia, Jonathan! ';
+            saudar = 'Bom dia, Jonathan! ';
           else if (horas >= 12 && horas <= 17)
-            saudar = ' • Boa tarde, Jonathan! ';
+            saudar = 'Boa tarde, Jonathan! ';
           else if (horas >= 17 && horas <= 24)
-            saudar = ' • Boa noite, Jonathan!  ';
+            saudar = 'Boa noite, Jonathan!  ';
 
           // imprimir data e hora atuais para o DOM
           document.getElementById('data-tempo').innerHTML = `
@@ -144,6 +153,9 @@
             <div class="tempo">
 
               ${tempo}
+              <div id="tópico">
+                ${tópico}
+              </div>
               ${saudar}
 
             </div>
