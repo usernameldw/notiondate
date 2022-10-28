@@ -1,131 +1,163 @@
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Cabeçalho</title>
-  <style>
 
-body {
-  background-color: #191919;
-  margin: 0px;
-}
+  <head>
 
-#clock {
-  display: flex;
-  font-family: sans-serif;
-  font-size: 22pt;
-  color: #d3d3d3;
-  border: 1px solid #191919;
-  justify-content: flex-start;
-  height: 100%;
-  line-height: 1.5;
-  font-weight: bold;
-  flex-direction: column;
-  overflow: hidden;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cabeçalho</title>
 
-#container {
-  display: flex;
-  align-items: flex-start;
-}
+    <style>
 
-#date{
-  font-size:12pt;
-  font-weight: bold;
-}
+      body {
 
-#greeting{
-  font-size:15pt;
-  font-weight: bold;
-}
+        background-color: #191919;
+        margin: 0px;
 
-  </style>
-</head>
-<body>
+      }
 
-<div id="clock">
-  <div id="date-time"></div>
-</div>
+      #relógio {
 
-<script>
+        display: flex;
+        font-family: sans-serif;
+        font-size: 18pt;
+        color: #d3d3d3;
+        border: 1px solid #191919;
+        justify-content: flex-start;
+        height: 100%;
+        line-height: 1.5;
+        font-weight: bold;
+        flex-direction: column;
+        overflow: hidden;
 
-window.addEventListener("load", () => {
-  clock();
-  function clock() {
-    const today = new Date();
+      }
 
-    // obter componentes de tempo
-    const hours = today.getHours();
-    const minutes = today.getMinutes();
-    const seconds = today.getSeconds();
+      #container {
 
-    // adicione '0' a hora, minuto e segundo quando forem menos de 10
-    const hour = hours < 10 ? "0" + hours : hours;
-    const minute = minutes < 10 ? "0" + minutes : minutes;
-    const second = seconds < 10 ? "0" + seconds : seconds;
+        display: flex;
+        align-items: flex-start;
 
-    // obter componentes de data
-    const month = today.getMonth();
-    const weekday = today.getDay();
-    const year = today.getFullYear();
-    const day = today.getDate();
+      }
 
-    const weeklist = [
-      "Domingo",
-      "Segunda-feira",
-      "Terça-feira",
-      "Quarta-feira",
-      "Quinta-feira",
-      "Sexta-feira",
-      "Sábado"
-    ];
+      #data {
 
-    // declarando uma lista de todos os meses em um ano
-    const monthList = [
-      "janeiro",
-      "fevereiro",
-      "março",
-      "abril",
-      "maio",
-      "junho",
-      "julho",
-      "agosto",
-      "setembro",
-      "outubro",
-      "novembro",
-      "dezembro"
-    ];
+        font-size: 12pt;
+        font-weight: bold;
 
-    // obter data e hora atuais
-    const time = hours + ":" + minute + ":" + second;
-    const date = weeklist[weekday] + ", " + day + " de " + monthList[month] + " de " + year;
-    var greet;
+      }
 
-    if (hours < 6)
-        greet = 'Boa noite, Jonathan!  ';
-    else if (hours >= 6 && hours <= 12)
-        greet = 'Bom dia, Jonathan! ';
-    else if (hours >= 12 && hours <= 17)
-        greet = 'Boa tarde, Jonathan! ';
-    else if (hours >= 17 && hours <= 24)
-        greet = 'Boa noite, Jonathan!  ';
+    </style>
 
-    // imprimir data e hora atuais para o DOM
-    document.getElementById('date-time').innerHTML = `
+  </head>
 
-        <div class="container">
-          <div class="time">${time}</div>
-          <div id="date"> ${date}</div>
-          <div id="greeting">${greet}</div>
-        <div/>
+  <body>
 
-  `
-    setTimeout(clock, 1000);
-  }
-});
+    <div id="relógio">
 
-</script>
-</body>
+      <div id="data-tempo"></div>
+
+    </div>
+
+    <script>
+
+      window.addEventListener("load", () => {
+
+        relógio();
+        function relógio() {
+
+          const hoje = new Date();
+
+          // obter componentes de tempo
+          const horas = hoje.getHours();
+          const minutos = hoje.getMinutes();
+          const segundos = hoje.getSeconds();
+
+          // adicione '0' a hora, minuto e segundo quando forem menos de 10
+          const hora = horas < 10 ? "0" + horas : horas;
+          const minuto = minutos < 10 ? "0" + minutos : minutos;
+          const segundo = segundos < 10 ? "0" + segundos : segundos;
+
+          // obter componentes de data
+          const mês = hoje.getMonth();
+          const semana = hoje.getDay();
+          const ano = hoje.getFullYear();
+          const dia = hoje.getDate();
+
+          // declarando uma lista de todos os dias da semana
+          const semanaLista = [
+
+            "Domingo",
+            "Segunda-feira",
+            "Terça-feira",
+            "Quarta-feira",
+            "Quinta-feira",
+            "Sexta-feira",
+            "Sábado"
+
+          ];
+
+          // declarando uma lista de todos os meses em um ano
+          const mêsLista = [
+
+            "janeiro",
+            "fevereiro",
+            "março",
+            "abril",
+            "maio",
+            "junho",
+            "julho",
+            "agosto",
+            "setembro",
+            "outubro",
+            "novembro",
+            "dezembro"
+
+          ];
+
+          // obter data e hora atuais
+          const data = semanaLista[semana] + ", " + dia + " de " + mêsLista[mês] + " de " + ano;
+          const tempo = horas + ":" + minuto + ":" + segundo;
+          var saudar;
+
+          if (horas < 6)
+            saudar = ' - Boa noite, Jonathan!  ';
+          else if (horas >= 6 && horas <= 12)
+            saudar = ' - Bom dia, Jonathan! ';
+          else if (horas >= 12 && horas <= 17)
+            saudar = ' - Boa tarde, Jonathan! ';
+          else if (horas >= 17 && horas <= 24)
+            saudar = ' - Boa noite, Jonathan!  ';
+
+          // imprimir data e hora atuais para o DOM
+          document.getElementById('data-tempo').innerHTML = `
+
+          <div class="container">
+
+            <div id="data">
+
+              ${data}
+
+            </div>
+
+            <div class="tempo">
+
+              ${tempo}
+              ${saudar}
+
+            </div>
+
+          <div/>
+
+          `
+          setTimeout(relógio, 1000);
+
+        }
+
+      });
+
+    </script>
+
+  </body>
+
 </html>
