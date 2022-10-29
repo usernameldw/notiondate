@@ -1,0 +1,194 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+
+  <title>CodePen - VueJS  Pomodoro WIP</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  
+<style>
+html {
+  font-size: 3vw;
+  background-color: #191919;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #262626;
+  border-radius: 5px;
+}
+.container #app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container #app > * {
+
+}
+.container .timer {
+
+  font-size: 9rem;
+  color: #EEEEEE;
+}
+.container .controls {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.container .controls > * {
+  color: #686868;
+  transition: 0.1s ease;
+}
+
+.container .controls > *:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.container .controls > *:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+.container .input input {
+  background-color: #424242;
+  border: none;
+  font-size: 2rem;
+  padding: 1em;
+  text-align: center;
+  color: #EEEEEE;
+  margin-top: 2rem;
+}
+.container .input .fade-enter-active, .container .input .fade-leave-active {
+  transition: opacity .5s;
+}
+.container .input .fade-enter, .container .input .fade-leave-to {
+  opacity: 0;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+  <div class="container">
+  <div id="app">
+    <div class="timer">
+      <span class="minute">{{ minutes }}</span>
+      <span>:</span>
+      <span class="seconds">{{ seconds }}</span>
+    </div>
+    <div class="controls">
+      <div class="start" v-if="!timer" @click="startTimer">
+        <i data-feather="play" ></i>
+      </div>
+      <div class="pause"  v-if="timer" @click="stopTimer">
+        <i data-feather="square"></i>
+      </div>
+      <div class="stop" v-if="resetButton" @click="resetTimer">
+        <i data-feather="rotate-cw"></i>
+      </div>
+      <div class="edit" v-if="!timer" @click="editTimer">
+        <i data-feather="edit-2"></i>
+      </div>
+    </div>
+    <div class="input">
+      <transition name="fade">
+        <input type="text" v-if="edit" v-model="userTime">
+      </transition>
+    </div>
+  </div>
+</div>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js'></script>
+<script src='https://unpkg.com/feather-icons/dist/feather.min.js'></script>
+      <script id="rendered-js" >
+feather.replace();
+
+const app = new Vue({
+  el: '#app',
+  data: {
+    timer: null,
+    totalTime: 25 * 60,
+    resetButton: false,
+    title: "Countdown to rest time!",
+    edit: false,
+    userTime: 25 },
+
+  methods: {
+    startTimer: function () {
+      this.timer = setInterval(() => this.countdown(), 1000); //1000ms = 1 second
+      this.resetButton = true;
+      this.edit = false;
+    },
+    stopTimer: function () {
+      clearInterval(this.timer);
+      this.timer = null;
+      this.resetButton = true;
+    },
+    resetTimer: function () {
+      this.totalTime = this.userTime * 60;
+      clearInterval(this.timer);
+      this.timer = null;
+      this.resetButton = false;
+    },
+    editTimer: function () {
+      this.edit = !this.edit;
+    },
+    padTime: function (time) {
+      return (time < 10 ? '0' : '') + time;
+    },
+    countdown: function () {
+      this.totalTime--;
+    } },
+
+  computed: {
+    minutes: function () {
+      const minutes = Math.floor(this.totalTime / 60);
+      return this.padTime(minutes);
+    },
+    seconds: function () {
+      const seconds = this.totalTime - this.minutes * 60;
+      return this.padTime(seconds);
+    } } });
+//# sourceURL=pen.js
+    </script>
+
+  
+
+</body>
+
+</html>
+ 
