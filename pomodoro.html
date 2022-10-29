@@ -73,10 +73,10 @@ html {
   background-color: #424242;
   border: none;
   font-size: 2rem;
-  padding: 1em;
   text-align: center;
   color: #EEEEEE;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  border-radius: .25rem;
 }
 .container .input .fade-enter-active, .container .input .fade-leave-active {
   transition: opacity .5s;
@@ -111,7 +111,7 @@ html {
     </div>
     <div class="controls">
       <div class="start" v-if="!timer" @click="startTimer">
-        <i data-feather="play" ></i>
+        <i data-feather="play"></i>
       </div>
       <div class="pause"  v-if="timer" @click="stopTimer">
         <i data-feather="square"></i>
