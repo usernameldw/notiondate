@@ -181,15 +181,15 @@ button:focus, button:active {
           <span class="separator">:</span>
           <span id="js-seconds">00</span>
         </div>
-        <button class="main-button" data-action="começar" id="js-btn">
-          Começar
+        <button class="main-button" data-action="start" id="js-btn">
+          Ativar
         </button>
       </div>
     </main>
     <div class="hidden">
-      <audio src="backtowork.mp3" data-sound="pomodoro"></audio>
-      <audio src="break.mp3" data-sound="shortBreak"></audio>
-      <audio src="break.mp3" data-sound="longBreak"></audio>
+      <audio src="https://freshman-pomodoro.surge.sh/break.mp3" data-sound="pomodoro"></audio>
+      <audio src="https://freshman-pomodoro.surge.sh/break.mp3" data-sound="shortBreak"></audio>
+      <audio src="https://freshman-pomodoro.surge.sh/break.mp3" data-sound="longBreak"></audio>
     </div>
     <script>
 
@@ -240,7 +240,7 @@ function startTimer() {
 
   if (timer.mode === 'pomodoro') timer.sessions++;
 
-  mainButton.dataset.action = 'pausar';
+  mainButton.dataset.action = 'stop';
   mainButton.classList.add('active');
   mainButton.textContent = 'pausar';
 
@@ -278,9 +278,9 @@ function startTimer() {
 function stopTimer() {
   clearInterval(interval);
 
-  mainButton.dataset.action = 'começar';
+  mainButton.dataset.action = 'start';
   mainButton.classList.remove('active');
-  mainButton.textContent = 'começar';
+  mainButton.textContent = 'ativar';
 }
 
 function switchMode(mode) {
@@ -318,7 +318,7 @@ const mainButton = document.getElementById('js-btn');
 mainButton.addEventListener('click', () => {
   const { action } = mainButton.dataset;
   buttonSound.play();
-  if (action === 'começar') {
+  if (action === 'start') {
     startTimer();
   } else {
     stopTimer();
