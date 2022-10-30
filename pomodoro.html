@@ -239,9 +239,9 @@ function startTimer() {
 
   if (timer.mode === 'pomodoro') timer.sessions++;
 
-  mainButton.dataset.action = 'parar';
+  mainButton.dataset.action = 'pausar';
   mainButton.classList.add('active');
-  mainButton.textContent = 'parar';
+  mainButton.textContent = 'pausar';
 
   interval = setInterval(function() {
     timer.remainingTime = getRemainingTime(endTime);
