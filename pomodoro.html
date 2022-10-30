@@ -165,14 +165,14 @@ button:focus, button:active {
             class="button mode-button"
             id="js-short-break"
           >
-            Short break
+            Pausa curta
           </button>
           <button
             data-mode="longBreak"
             class="button mode-button"
             id="js-long-break"
           >
-            Long break
+            Pausa longa
           </button>
         </div>
         <div class="clock" id="js-clock">
@@ -180,8 +180,8 @@ button:focus, button:active {
           <span class="separator">:</span>
           <span id="js-seconds">00</span>
         </div>
-        <button class="main-button" data-action="start" id="js-btn">
-          Start
+        <button class="main-button" data-action="começar" id="js-btn">
+          Começar
         </button>
       </div>
     </main>
@@ -239,9 +239,9 @@ function startTimer() {
 
   if (timer.mode === 'pomodoro') timer.sessions++;
 
-  mainButton.dataset.action = 'stop';
+  mainButton.dataset.action = 'parar';
   mainButton.classList.add('active');
-  mainButton.textContent = 'stop';
+  mainButton.textContent = 'parar';
 
   interval = setInterval(function() {
     timer.remainingTime = getRemainingTime(endTime);
@@ -277,9 +277,9 @@ function startTimer() {
 function stopTimer() {
   clearInterval(interval);
 
-  mainButton.dataset.action = 'start';
+  mainButton.dataset.action = 'começar';
   mainButton.classList.remove('active');
-  mainButton.textContent = 'start';
+  mainButton.textContent = 'começar';
 }
 
 function switchMode(mode) {
@@ -317,7 +317,7 @@ const mainButton = document.getElementById('js-btn');
 mainButton.addEventListener('click', () => {
   const { action } = mainButton.dataset;
   buttonSound.play();
-  if (action === 'start') {
+  if (action === 'começar') {
     startTimer();
   } else {
     stopTimer();
