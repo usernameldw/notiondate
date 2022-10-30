@@ -1,194 +1,334 @@
-
-
 <!DOCTYPE html>
-<html lang="en" >
-
-<head>
-
-  <meta charset="UTF-8">
-  
-<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
-<meta name="apple-mobile-web-app-title" content="CodePen">
-
-<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
-
-<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Freshman Pomodoro Clock Demo</title>
 
 
-  <title>CodePen - VueJS  Pomodoro WIP</title>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-  
 <style>
+
+/* ==========================================================================
+   #POMODORO APP STYLES
+   ========================================================================== */
+
+/**
+ *
+ * Inheriting box sizing slightly better best-practice
+ * https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ *
+ */
+
 html {
-  font-size: 3vw;
-  background-color: #191919;
+  box-sizing: border-box;
 }
 
-.container {
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --pomodoro: hsl(223, 25%, 40%);
+  --shortBreak: hsl(48, 23%, 40%);
+  --longBreak: hsl(105, 16%, 40%);
+  --bgc: var(--pomodoro);
+}
+
+body {
+  background-color: var(--bgc);
+  transition: background-color 1s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  user-select: none;
+}
+
+progress {
+  border-radius: 2px;
   width: 100%;
-  height: 100%;
+  height: 12px;
+  position: fixed;
+  top: 0;
+}
+
+progress::-webkit-progress-bar {
+ background-color: rgba(0, 0, 0, 0.1);;
+}
+
+progress::-webkit-progress-value {
+  background-color: #fff;
+}
+
+.timer {
   position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #262626;
-  border-radius: .25rem;
-}
-.container #app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.container #app > * {
-
-}
-.container .timer {
-
-  font-size: 9rem;
-  color: #EEEEEE;
-}
-.container .controls {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-}
-.container .controls > * {
-  color: #686868;
-  transition: 0.1s ease;
-}
-
-.container .controls > *:hover {
-  cursor: pointer;
-  transform: scale(1.2);
-}
-
-.container .controls > *:hover {
-  cursor: pointer;
-  transform: scale(1.2);
-}
-.container .input input {
-  background-color: #424242;
-  border: none;
-  font-size: 2rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
   text-align: center;
-  color: #EEEEEE;
-  margin-top: 1rem;
-  border-radius: .25rem;
 }
-.container .input .fade-enter-active, .container .input .fade-leave-active {
-  transition: opacity .5s;
+
+.clock {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-size: 30vw;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  font-family: arial, sans-serif;
 }
-.container .input .fade-enter, .container .input .fade-leave-to {
-  opacity: 0;
+
+.mode-button {
+  font-size: 16px;
+  height: 28px;
+  cursor: pointer;
+  box-shadow: none;
+  font-weight: 300;
+  color: #fff;
+  border: 1px solid transparent;
+  margin: 0px;
+  border-radius: 4px;
+  padding: 2px 12px;
+  background: none;
 }
+
+.mode-button.active {
+  border-color: #fff;
+}
+
+.main-button {
+  cursor: pointer;
+  box-shadow: rgb(235, 235, 235) 0px 6px 0px;
+  font-size: 22px;
+  height: 55px;
+  text-transform: uppercase;
+  color: hsl(175, 26%, 41%);
+  font-weight: bold;
+  width: 200px;
+  background-color: white;
+  border-width: initial;
+  border-style: none;
+  margin: 20px 0px 0px;
+  padding: 0px 12px;
+  border-radius: 4px;
+  transition: color 0.5s ease-in-out 0s;
+}
+
+button:focus, button:active {
+  outline: none;
+}
+
+.main-button.active {
+  transform: translateY(6px);
+  box-shadow: none;
+  outline: none;
+}
+
+.hidden {
+  display: none;
+}
+
 </style>
 
-  <script>
-  window.console = window.console || function(t) {};
-</script>
+  </head>
+  <body>
+    <main class="app">
+      <progress id="js-progress" value="0"></progress>
+      <div class="progress-bar"></div>
+      <div class="timer">
+        <div class="button-group mode-buttons" id="js-mode-buttons">
+          <button
+            data-mode="pomodoro"
+            class="button active mode-button"
+            id="js-pomodoro"
+          >
+            Pomodoro
+          </button>
+          <button
+            data-mode="shortBreak"
+            class="button mode-button"
+            id="js-short-break"
+          >
+            Short break
+          </button>
+          <button
+            data-mode="longBreak"
+            class="button mode-button"
+            id="js-long-break"
+          >
+            Long break
+          </button>
+        </div>
+        <div class="clock" id="js-clock">
+          <span id="js-minutes">25</span>
+          <span class="separator">:</span>
+          <span id="js-seconds">00</span>
+        </div>
+        <button class="main-button" data-action="start" id="js-btn">
+          Start
+        </button>
+      </div>
+    </main>
+    <div class="hidden">
+      <audio src="backtowork.mp3" data-sound="pomodoro"></audio>
+      <audio src="break.mp3" data-sound="shortBreak"></audio>
+      <audio src="break.mp3" data-sound="longBreak"></audio>
+    </div>
+    <script>
 
-  
-  
-  <script>
-  if (document.location.search.match(/type=embed/gi)) {
-    window.parent.postMessage("resize", "*");
+const timer = {
+  pomodoro: 25,
+  shortBreak: 5,
+  longBreak: 15,
+  longBreakInterval: 4,
+  sessions: 0,
+};
+
+let interval;
+
+function getRemainingTime(endTime) {
+  const currentTime = Date.parse(new Date());
+  const difference = endTime - currentTime;
+
+  const total = parseInt(difference / 1000);
+  const minutes = parseInt((total / 60) % 60);
+  const seconds = parseInt(total % 60);
+
+  return {
+    total,
+    minutes,
+    seconds,
+  };
+}
+
+function updateClock() {
+  const { remainingTime } = timer;
+  const minutes = `${remainingTime.minutes}`.padStart(2, '0');
+  const seconds = `${remainingTime.seconds}`.padStart(2, '0');
+
+  const min = document.getElementById('js-minutes');
+  const sec = document.getElementById('js-seconds');
+  const time = `${minutes}:${seconds}`;
+  min.textContent = minutes;
+  sec.textContent = seconds;
+
+  document.title = `${time} - Freshman Pomodoro Clock Demo`;
+  const progress = document.getElementById('js-progress');
+  progress.value = timer[timer.mode] * 60 - timer.remainingTime.total;
+}
+
+function startTimer() {
+  let { total } = timer.remainingTime;
+  const endTime = Date.parse(new Date()) + total * 1000;
+
+  if (timer.mode === 'pomodoro') timer.sessions++;
+
+  mainButton.dataset.action = 'stop';
+  mainButton.classList.add('active');
+  mainButton.textContent = 'stop';
+
+  interval = setInterval(function() {
+    timer.remainingTime = getRemainingTime(endTime);
+    total = timer.remainingTime.total;
+    updateClock();
+    if (total <= 0) {
+      clearInterval(interval);
+
+      switch (timer.mode) {
+        case 'pomodoro':
+          if (timer.sessions % timer.longBreakInterval === 0) {
+            switchMode('longBreak');
+          } else {
+            switchMode('shortBreak');
+          }
+          break;
+        default:
+          switchMode('pomodoro');
+      }
+
+      if (Notification.permission === 'granted') {
+        const text =
+          timer.mode === 'pomodoro' ? 'Get back to work!' : 'Take a break!';
+        new Notification(text);
+      }
+
+      document.querySelector(`[data-sound="${timer.mode}"]`).play();
+      startTimer();
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(interval);
+
+  mainButton.dataset.action = 'start';
+  mainButton.classList.remove('active');
+  mainButton.textContent = 'start';
+}
+
+function switchMode(mode) {
+  timer.mode = mode;
+  timer.remainingTime = {
+    total: timer[mode] * 60,
+    minutes: timer[mode],
+    seconds: 0,
+  };
+
+  document
+    .querySelectorAll('button[data-mode]')
+    .forEach(e => e.classList.remove('active'));
+  document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
+  document
+    .getElementById('js-progress')
+    .setAttribute('max', timer.remainingTime.total);
+  document.body.style.backgroundColor = `var(--${mode})`;
+
+  updateClock();
+}
+
+function handleMode(event) {
+  const { mode } = event.target.dataset;
+
+  if (!mode) return;
+
+  timer.sessions = 0;
+  switchMode(mode);
+  stopTimer();
+}
+
+const buttonSound = new Audio('button-sound.mp3');
+const mainButton = document.getElementById('js-btn');
+mainButton.addEventListener('click', () => {
+  const { action } = mainButton.dataset;
+  buttonSound.play();
+  if (action === 'start') {
+    startTimer();
+  } else {
+    stopTimer();
   }
+});
+
+const modeButtons = document.querySelector('#js-mode-buttons');
+modeButtons.addEventListener('click', handleMode);
+
+document.addEventListener('DOMContentLoaded', () => {
+  if ('Notification' in window && Notification.permission !== 'denied') {
+    Notification.requestPermission().then(function(permission) {
+      if (permission === 'granted') {
+        new Notification(
+          'Awesome! You will receive notifications at the start of a pomodoro or a break'
+        );
+      }
+    });
+  }
+
+  switchMode('pomodoro');
+});
+
+
+
+
 </script>
-
-
-</head>
-
-<body translate="no" >
-  <div class="container">
-  <div id="app">
-    <div class="timer">
-      <span class="minute">{{ minutes }}</span>
-      <span>:</span>
-      <span class="seconds">{{ seconds }}</span>
-    </div>
-    <div class="controls">
-      <div class="start" v-if="!timer" @click="startTimer">
-        <i data-feather="play"></i>
-      </div>
-      <div class="pause"  v-if="timer" @click="stopTimer">
-        <i data-feather="square"></i>
-      </div>
-      <div class="stop" v-if="resetButton" @click="resetTimer">
-        <i data-feather="rotate-cw"></i>
-      </div>
-      <div class="edit" v-if="!timer" @click="editTimer">
-        <i data-feather="edit-2"></i>
-      </div>
-    </div>
-    <div class="input">
-      <transition name="fade">
-        <input type="text" v-if="edit" v-model="userTime">
-      </transition>
-    </div>
-  </div>
-</div>
-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
-
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js'></script>
-<script src='https://unpkg.com/feather-icons/dist/feather.min.js'></script>
-      <script id="rendered-js" >
-feather.replace();
-
-const app = new Vue({
-  el: '#app',
-  data: {
-    timer: null,
-    totalTime: 25 * 60,
-    resetButton: false,
-    title: "Countdown to rest time!",
-    edit: false,
-    userTime: 25 },
-
-  methods: {
-    startTimer: function () {
-      this.timer = setInterval(() => this.countdown(), 1000); //1000ms = 1 second
-      this.resetButton = true;
-      this.edit = false;
-    },
-    stopTimer: function () {
-      clearInterval(this.timer);
-      this.timer = null;
-      this.resetButton = true;
-    },
-    resetTimer: function () {
-      this.totalTime = this.userTime * 60;
-      clearInterval(this.timer);
-      this.timer = null;
-      this.resetButton = false;
-    },
-    editTimer: function () {
-      this.edit = !this.edit;
-    },
-    padTime: function (time) {
-      return (time < 10 ? '0' : '') + time;
-    },
-    countdown: function () {
-      this.totalTime--;
-    } },
-
-  computed: {
-    minutes: function () {
-      const minutes = Math.floor(this.totalTime / 60);
-      return this.padTime(minutes);
-    },
-    seconds: function () {
-      const seconds = this.totalTime - this.minutes * 60;
-      return this.padTime(seconds);
-    } } });
-//# sourceURL=pen.js
-    </script>
-
-  
-
-</body>
-
+  </body>
 </html>
- 
