@@ -263,12 +263,6 @@ function startTimer() {
           switchMode('pomodoro');
       }
 
-      if (Notification.permission === 'granted') {
-        const text =
-          timer.mode === 'pomodoro' ? 'Get back to work!' : 'Take a break!';
-        new Notification(text);
-      }
-
       document.querySelector(`[data-sound="${timer.mode}"]`).play();
       startTimer();
     }
@@ -329,15 +323,7 @@ const modeButtons = document.querySelector('#js-mode-buttons');
 modeButtons.addEventListener('click', handleMode);
 
 document.addEventListener('DOMContentLoaded', () => {
-  if ('Notification' in window && Notification.permission !== 'denied') {
-    Notification.requestPermission().then(function(permission) {
-      if (permission === 'granted') {
-        new Notification(
-          'Awesome! You will receive notifications at the start of a pomodoro or a break'
-        );
-      }
-    });
-  }
+
 
   switchMode('pomodoro');
 });
