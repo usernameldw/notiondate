@@ -263,12 +263,6 @@ function startTimer() {
           switchMode('pomodoro');
       }
 
-
-      if (Notification.permission === 'granted') {
-
-      }
-
-
       document.querySelector(`[data-sound="${timer.mode}"]`).play();
       startTimer();
     }
