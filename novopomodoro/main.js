@@ -115,6 +115,8 @@ function handleMode(event) {
   timer.sessions = 0;
   switchMode(mode);
   stopTimer();
+    nebulizadorSound.pause();
+    nebulizadorSound.currentTime = 0;
 }
 
 const buttonSound = new Audio('button-sound.mp3');
