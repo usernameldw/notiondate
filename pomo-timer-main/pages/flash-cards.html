@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <title>PomodoroPal - Flashcards</title>
+</head>
+<body class="flashcard-page">
+    
+    <header>
+        <div class="flashcards-container">
+            <div class="flashcard-nav">
+                <h1>Flashcards</h1>
+                <div>
+                    <button class="flash-btns" onclick="showCreateCardBox()">
+                    New Card</button>
+                    <button class="flash-btns" onclick="delFlashcards()">
+                    Del Cards</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flashcards-container">
+        <div class="create-box">
+            <h2 style="text-align: center; color: black;">
+            Create Flashcard</h2>
+            <label for="question">Questions</label>
+            <textarea id="question"></textarea>
+            <br>
+            <label for="answer">Answer</label>
+            <textarea id="answer"></textarea>
+
+            <div>
+                <button class="flash-btns" onclick="addFlashcard()">Save</button>
+                <button class="flash-btns" onclick="hideCreateBox()">Close</button>
+            </div>
+        </div>
+
+        <div class="flashcards_"></div>
+    </div>
+
+    <script src="flash-cards.js"></script>
+</body>
+</html>
