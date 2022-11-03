@@ -67,10 +67,8 @@ function startTimer() {
         default:
         switchMode('pomodoro');
       }
-
-const breakSound = new Audio('break.mp3');
-  breakSound.play();
-
+      var audio = new Audio('break.mp3'); audio.play();
+      startTimer();
     }
   }, 1000);
 }
