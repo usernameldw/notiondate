@@ -68,9 +68,8 @@ function startTimer() {
         switchMode('pomodoro');
       }
 
-  mainButton.dataset.action = 'start';
-  mainButton.classList.remove('active');
-  mainButton.textContent = 'ativar';
+const breakSound = new Audio('break.mp3');
+  breakSound.play();
 
     }
   }, 1000);
