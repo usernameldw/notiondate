@@ -1,3 +1,5 @@
+
+
 const timer = {
   pomodoro: 25,
   shortBreak: 5,
@@ -124,7 +126,6 @@ const nebulizadorSound = new Audio('nebulizador.mp3');
 const mainButton = document.getElementById('js-btn');
 mainButton.addEventListener('click', () => {
   const { action } = mainButton.dataset;
-  buttonSound.play();
 
   if (action === 'start') {
     startTimer();
@@ -133,6 +134,7 @@ mainButton.addEventListener('click', () => {
     stopTimer();
     nebulizadorSound.pause();
     nebulizadorSound.currentTime = 0;
+
   }
 });
 
@@ -140,7 +142,6 @@ const modeButtons = document.querySelector('#js-mode-buttons');
 modeButtons.addEventListener('click', handleMode);
 
 document.addEventListener('DOMContentLoaded', () => {
-
 
   switchMode('pomodoro');
 });
