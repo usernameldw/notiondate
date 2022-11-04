@@ -1,9 +1,9 @@
 
 
 const timer = {
-  pomodoro: 25,
-  shortBreak: 5,
-  longBreak: 15,
+  pomodoro: 0.1,
+  shortBreak: 0.1,
+  longBreak: 0.1,
   longBreakInterval: 4,
   sessions: 0,
 };
@@ -123,6 +123,16 @@ function handleMode(event) {
 
 const buttonSound = new Audio('button-sound.mp3');
 const nebulizadorSound = new Audio('nebulizador.mp3');
+const volumeSlider = document.getElementById('volume-slider');
+const outputContainer = document.getElementById('volume-output');
+
+volumeSlider.addEventListener('input', (e) => {
+  const value = e.target.value;
+
+  outputContainer.textContent = value;
+  nebulizadorSound.volume = value / 100;
+});
+
 const mainButton = document.getElementById('js-btn');
 mainButton.addEventListener('click', () => {
   const { action } = mainButton.dataset;
