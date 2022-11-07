@@ -124,12 +124,10 @@ function handleMode(event) {
 const buttonSound = new Audio('button-sound.mp3');
 const nebulizadorSound = new Audio('nebulizador.mp3');
 const volumeSlider = document.getElementById('volume-slider');
-const outputContainer = document.getElementById('volume-output');
 
 volumeSlider.addEventListener('input', (e) => {
   const value = e.target.value;
 
-  outputContainer.textContent = value;
   nebulizadorSound.volume = value / 100;
 });
 
