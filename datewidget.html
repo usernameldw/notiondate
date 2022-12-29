@@ -118,18 +118,18 @@
           // declarando uma lista de todos os meses em um ano
           const mêsLista = [
 
-            "janeiro",
-            "fevereiro",
-            "março",
-            "abril",
-            "maio",
-            "junho",
-            "julho",
-            "agosto",
-            "setembro",
-            "outubro",
-            "novembro",
-            "dezembro"
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "10",
+            "11",
+            "12"
 
           ];
 
@@ -144,7 +144,7 @@
 
           // obter data e hora atuais
           const horaNo = hora + ":" + minuto + ":" + segundo;
-          const data = dia + "/" + mês + "/" + ano;
+          const data = dia + "/" + mêsLista[mês] + "/" + ano;
           const semanaNo = semanaLista[semana] + ", " + new Date().getWeekNumber() + "° " + " semana "
 
 
