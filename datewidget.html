@@ -143,8 +143,8 @@
           };
 
           // obter data e hora atuais
-          const data = dia + " de " + mêsLista[mês] + ", " + hora + ":" + minuto + ":" + segundo;
-          const semanaNo = semanaLista[semana] + ", " + new Date().getWeekNumber() + "° " + " semana " + " de " + ano;;
+          const semanaNo = semanaLista[semana] + ", " + new Date().getWeekNumber() + "° " + " semana " + " de " + ano;
+          const data = dia + " de " + mêsLista[mês] + ", " + hora + ":" + minuto + ":" + segundo;;
 
 
 
@@ -154,10 +154,10 @@
           document.getElementById('data-tempo').innerHTML = `
           <div class="container">
             <div id="semanaNo">
-              ${semanaNo}
+              ${data}
             </div>
             <div id="data">
-              ${data}
+              ${semanaNo}
             </div>
 
           <div/>
