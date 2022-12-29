@@ -42,7 +42,7 @@
 
       #data {
 
-        font-size: 20pt;
+        font-size: 15pt;
         font-weight: bold;
         color: #d3d3d3;
 
@@ -50,7 +50,7 @@
       
       #horaNo {
 
-        font-size: 11pt;
+        font-size: 20pt;
         font-weight: bold;
         color: #d3d3d3;
 
@@ -58,7 +58,7 @@
 
       #semanaNo {
 
-        font-size: 11pt;
+        font-size: 10pt;
         font-weight: bold;
         color: #d3d3d3;
 
@@ -155,14 +155,14 @@
           // imprimir data e hora atuais para o DOM
           document.getElementById('data-tempo').innerHTML = `
           <div class="container">
+            <div id="horaNo">
+              ${horaNo}
+            </div>
             <div id="data">
               ${data}
             </div>
             <div id="semanaNo">
               ${semanaNo}
-            </div>
-            <div id="horaNo">
-              ${horaNo}
             </div>
 
           <div/>
