@@ -42,6 +42,14 @@
 
       #data {
 
+        font-size: 20pt;
+        font-weight: bold;
+        color: #d3d3d3;
+
+      }
+      
+      #hora {
+
         font-size: 11pt;
         font-weight: bold;
         color: #d3d3d3;
@@ -135,8 +143,10 @@
           };
 
           // obter data e hora atuais
+          const data = dia + " de " + mêsLista[mês];
+          const hora = hora + ":" + minuto + ":" + segundo;
           const semanaNo = semanaLista[semana] + ", " + new Date().getWeekNumber() + "° " + " semana " + " de " + ano;
-          const data = dia + " de " + mêsLista[mês] + ", " + hora + ":" + minuto + ":" + segundo;;
+
 
 
 
