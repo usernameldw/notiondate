@@ -48,7 +48,7 @@
 
       }
       
-      #hora {
+      #horaNo {
 
         font-size: 11pt;
         font-weight: bold;
@@ -144,7 +144,7 @@
 
           // obter data e hora atuais
           const data = dia + " de " + mêsLista[mês];
-          const hora = hora + ":" + minuto + ":" + segundo;
+          const horaNo = hora + ":" + minuto + ":" + segundo;
           const semanaNo = semanaLista[semana] + ", " + new Date().getWeekNumber() + "° " + " semana " + " de " + ano;
 
 
@@ -161,8 +161,8 @@
             <div id="semanaNo">
               ${semanaNo}
             </div>
-            <div id="hora">
-              ${hora}
+            <div id="horaNo">
+              ${horaNo}
             </div>
 
           <div/>
