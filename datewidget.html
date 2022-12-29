@@ -42,7 +42,7 @@
 
       #data {
 
-        font-size: 20pt;
+        font-size: 11pt;
         font-weight: bold;
         color: #d3d3d3;
 
@@ -143,8 +143,10 @@
           };
 
           // obter data e hora atuais
+          const data = dia + " de " + mêsLista[mês];
+          const hora = hora + ":" + minuto + ":" + segundo;
           const semanaNo = semanaLista[semana] + ", " + new Date().getWeekNumber() + "° " + " semana " + " de " + ano;
-          const data = dia + " de " + mêsLista[mês] + ", " + hora + ":" + minuto + ":" + segundo;;
+
 
 
 
@@ -153,11 +155,14 @@
           // imprimir data e hora atuais para o DOM
           document.getElementById('data-tempo').innerHTML = `
           <div class="container">
-            <div id="semanaNo">
+            <div id="data">
               ${data}
             </div>
-            <div id="data">
+            <div id="semanaNo">
               ${semanaNo}
+            </div>
+            <div id="hora">
+              ${hora}
             </div>
 
           <div/>
