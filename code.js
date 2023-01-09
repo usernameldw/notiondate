@@ -20,4 +20,4 @@ if(data.a.hasOwnProperty("ub")){document.getElementById(id+'_info_box_inner').in
 else if(data.hasOwnProperty("error_code")){document.getElementById(id).innerHTML='';console.log('weatherwidget.org / Error: '+data.error_msg+' (Error code '+data.error_code+')')}}
 function updateWidget(id,gen){if(gen===1){loadingToggle(id,1)}
 collectData(id,gen)}
-updateWidget('ww_703530915435f',0);
+updateWidget('ww_703530915435f',1000);
