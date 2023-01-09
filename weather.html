@@ -1,1 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cabeçalho</title>
+
+    <style>
+
+      body {
+
+        background-color: #191919;
+        margin: 0px;
+
+      }
+
+      #relógio {
+
+        display: flex;
+        font-family: sans-serif;
+        font-size: 19pt;
+        color: #d3d3d3;
+        border: 1px solid #191919;
+        justify-content: flex-start;
+        height: 100%;
+        line-height: 1.5;
+        font-weight: bold;
+        flex-direction: column;
+        overflow: hidden;
+
+      }
+
+      #container {
+
+        display: flex;
+        align-items: flex-start;
+
+      }
+
+      
+      #horaNo {
+
+        font-size: 25pt;
+        font-weight: normal;
+        color: #d3d3d3;
+
+      }
+      
+      #data {
+
+        font-size: 13pt;
+        font-weight: bold;
+        color: #d3d3d3;
+
+      }
+
+      #semanaNo {
+
+        font-size: 11pt;
+        font-weight: bold;
+        color: #d3d3d3;
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div id="relógio">
+
+      <div id="data-tempo"></div>
+
+    </div>
+
+    <script>
+
+      window.addEventListener("load", () => {
+
+        relógio();
+        function relógio() {
+
+          const hoje = new Date();
+
+          // obter componentes de tempo
+          const horas = hoje.getHours();
+          const minutos = hoje.getMinutes();
+          const segundos = hoje.getSeconds();
+
+          // adicione '0' a hora, minuto e segundo quando forem menos de 10
+          const hora = horas < 10 ? "0" + horas : horas;
+          const minuto = minutos < 10 ? "0" + minutos : minutos;
+          const segundo = segundos < 10 ? "0" + segundos : segundos;
+
+          // obter componentes de data
+          const mês = hoje.getMonth();
+          const semana = hoje.getDay();
+          const ano = hoje.getFullYear();
+          const dia = hoje.getDate();
+          const tópico = " • "
+
+          // declarando uma lista de todos os dias da semana
+          const semanaLista = [
+
+            "Domingo",
+            "Segunda-feira",
+            "Terça-feira",
+            "Quarta-feira",
+            "Quinta-feira",
+            "Sexta-feira",
+            "Sábado"
+
+          ];
+
+          // declarando uma lista de todos os meses em um ano
+          const mêsLista = [
+
+            "janeiro",
+            "fevereiro",
+            "março",
+            "abril",
+            "maio",
+            "junho",
+            "julho",
+            "agosto",
+            "setembro",
+            "outubro",
+            "novembro",
+            "dezembro"
+
+          ];
+
+          Date.prototype.getWeekNumber = function(){
+            var d = new Date(Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()));
+            var dayNum = d.getUTCDay() || 7;
+            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+            var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
+
+          };
+
+          // obter data e hora atuais
+          const horaNo = hora + ":" + minuto + ":" + segundo;
+          const data = dia + " de " + mêsLista[mês] + " de " + ano;
+          const semanaNo = semanaLista[semana] + ", " + new Date().getWeekNumber() + "ª " + " semana "
+
+
+
+
+
+
+          // imprimir data e hora atuais para o DOM
+          document.getElementById('data-tempo').innerHTML = `
+          <div class="container">
 <div id="ww_703530915435f" v='1.3' loc='auto' a='{"t":"responsive","lang":"pt","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"#FFFFFF00","cl_font":"rgba(211,211,211,1)","cl_cloud":"#d4d4d4","cl_persp":"#2196F3","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722","cl_odd":"#00000000"}'><a href="https://weatherwidget.org/pl/" id="ww_703530915435f_u" target="_blank">Bezpłatny Widget Pogodowy dla Witryny</a></div><script async src="https://app1.weatherwidget.org/js/?id=ww_703530915435f"></script>
+
+          <div/>
+
+          `
+          setTimeout(relógio, 1000);
+
+        }
+
+      });
+
+    </script>
+
+  </body>
+
+</html>
+
