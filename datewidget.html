@@ -106,13 +106,13 @@
           // declarando uma lista de todos os dias da semana
           const semanaLista = [
 
-            "Domingo",
-            "Segunda-feira",
-            "Terça-feira",
-            "Quarta-feira",
-            "Quinta-feira",
-            "Sexta-feira",
-            "Sábado"
+            "domingo",
+            "segunda-feira",
+            "terça-feira",
+            "quarta-feira",
+            "quinta-feira",
+            "sexta-feira",
+            "sábado"
 
           ];
 
@@ -146,7 +146,7 @@
           // obter data e hora atuais
           const horaNo = hora + ":" + minuto + ":" + segundo;
           const data = dia + " de " + mêsLista[mês] + " de " + ano;
-          const semanaNo = semanaLista[semana] + ", " + new Date().getWeekNumber() + "ª " + " semana "
+          const semanaNo = new Date().getWeekNumber() + "ª " + " semana " + ", " + semanaLista[semana]
 
 
 
