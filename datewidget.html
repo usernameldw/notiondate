@@ -1,124 +1,116 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cabeçalho</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cabeçalho</title>
 
-    <style>
-      body {
-        background-color: #191919;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        overflow: hidden;
-        font-family: sans-serif;
+  <style>
+    body {
+      background-color: #191919;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    #relógio {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      width: 100vw;
+      height: 100vh;
+      padding: 0;
+      margin: 0;
+      line-height: 1; /* Evitar espaços verticais adicionais */
+    }
+
+    #horaNo {
+      display: block;
+      color: #d3d3d3;
+      margin: 0;
+      white-space: nowrap;
+      width: 100%;
+      text-align: center;
+      font-size: calc(100vw / 10); /* Ajustar automaticamente com base na largura da tela */
+    }
+
+    #data,
+    #semanaNo {
+      display: block;
+      color: #d3d3d3;
+      margin: 0;
+      white-space: nowrap;
+      text-align: center;
+      font-size: calc(100vw / 25); /* Também ajustável com base na largura da tela */
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="relógio">
+    <div id="horaNo"></div>
+    <div id="data"></div>
+    <div id="semanaNo"></div>
+  </div>
+
+  <script>
+    window.addEventListener("load", () => {
+      relógio();
+      function relógio() {
+        const hoje = new Date();
+
+        // obter componentes de tempo
+        const horas = hoje.getHours();
+        const minutos = hoje.getMinutes();
+        const segundos = hoje.getSeconds();
+        const hora = horas < 10 ? "0" + horas : horas;
+        const minuto = minutos < 10 ? "0" + minutos : minutos;
+        const segundo = segundos < 10 ? "0" + segundos : segundos;
+
+        // obter componentes de data
+        const mês = hoje.getMonth();
+        const semana = hoje.getDay();
+        const ano = hoje.getFullYear();
+        const dia = hoje.getDate();
+
+        // declarando uma lista de todos os dias da semana
+        const semanaLista = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+
+        // declarando uma lista de todos os meses em um ano
+        const mêsLista = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+
+        Date.prototype.getWeekNumber = function () {
+          var d = new Date(Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()));
+          var dayNum = d.getUTCDay() || 7;
+          d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+          var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+          return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        };
+
+        // obter data e hora atuais
+        const horaNo = hora + ":" + minuto + ":" + segundo;
+        const data = dia + " de " + mêsLista[mês] + " de " + ano;
+        const semanaNo = new Date().getWeekNumber() + "ª " + " semana, " + semanaLista[semana];
+
+        // imprimir data e hora atuais para o DOM
+        document.getElementById('horaNo').innerHTML = horaNo;
+        document.getElementById('data').innerHTML = data;
+        document.getElementById('semanaNo').innerHTML = semanaNo;
+
+        setTimeout(relógio, 1000);
       }
+    });
+  </script>
 
-      #relógio {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        width: 100vw;
-        height: 100vh;
-      }
-
-      #horaNo {
-        font-size: 20vw; /* Tamanho inicial ajustável */
-        font-weight: normal;
-        margin: 0;
-        white-space: nowrap; /* Para impedir quebra de linha */
-        color: #d3d3d3;
-      }
-
-      #data {
-        font-size: 6vw; /* Ajustar a fonte da data */
-        font-weight: bold;
-        margin: 0;
-        color: #d3d3d3;
-        white-space: nowrap;
-      }
-
-      #semanaNo {
-        font-size: 5vw; /* Ajustar a fonte da semana */
-        font-weight: bold;
-        margin: 0;
-        color: #d3d3d3;
-        white-space: nowrap;
-      }
-      
-      /* Ajusta a fonte da hora automaticamente para atingir borda a borda */
-      @media screen and (max-width: 800px) {
-        #horaNo {
-          font-size: 25vw; /* Ajustar para telas menores */
-        }
-      }
-    </style>
-
-  </head>
-
-  <body>
-
-    <div id="relógio">
-      <div id="horaNo"></div>
-      <div id="data"></div>
-      <div id="semanaNo"></div>
-    </div>
-
-    <script>
-      window.addEventListener("load", () => {
-        relógio();
-        function relógio() {
-          const hoje = new Date();
-
-          // obter componentes de tempo
-          const horas = hoje.getHours();
-          const minutos = hoje.getMinutes();
-          const segundos = hoje.getSeconds();
-          const hora = horas < 10 ? "0" + horas : horas;
-          const minuto = minutos < 10 ? "0" + minutos : minutos;
-          const segundo = segundos < 10 ? "0" + segundos : segundos;
-
-          // obter componentes de data
-          const mês = hoje.getMonth();
-          const semana = hoje.getDay();
-          const ano = hoje.getFullYear();
-          const dia = hoje.getDate();
-
-          // declarando uma lista de todos os dias da semana
-          const semanaLista = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
-
-          // declarando uma lista de todos os meses em um ano
-          const mêsLista = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
-
-          Date.prototype.getWeekNumber = function() {
-            var d = new Date(Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()));
-            var dayNum = d.getUTCDay() || 7;
-            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-            var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-          };
-
-          // obter data e hora atuais
-          const horaNo = hora + ":" + minuto + ":" + segundo;
-          const data = dia + " de " + mêsLista[mês] + " de " + ano;
-          const semanaNo = new Date().getWeekNumber() + "ª " + " semana, " + semanaLista[semana];
-
-          // imprimir data e hora atuais para o DOM
-          document.getElementById('horaNo').innerHTML = horaNo;
-          document.getElementById('data').innerHTML = data;
-          document.getElementById('semanaNo').innerHTML = semanaNo;
-
-          setTimeout(relógio, 1000);
-        }
-      });
-    </script>
-
-  </body>
+</body>
 
 </html>
