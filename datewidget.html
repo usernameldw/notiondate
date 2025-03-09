@@ -11,6 +11,7 @@
     body {
       background-color: #191919;
       margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -23,32 +24,28 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      text-align: center;
       width: 100vw;
       height: 100vh;
       padding: 0;
       margin: 0;
-      line-height: 1; /* Evitar espaços verticais adicionais */
+      line-height: 1; /* Reduzir espaçamento entre linhas */
+    }
+
+    #horaNo,
+    #data,
+    #semanaNo {
+      color: #d3d3d3;
+      margin: 0;
+      white-space: nowrap;
+      text-align: center;
+      width: 100%;
+      padding: 0;
+      /* Usar VW para garantir que a fonte ocupe a largura da tela */
+      font-size: 10vw; /* Ajustar a altura com base na largura da viewport */
     }
 
     #horaNo {
-      display: block;
-      color: #d3d3d3;
-      margin: 0;
-      white-space: nowrap;
-      width: 100%;
-      text-align: center;
-      font-size: calc(100vw / 10); /* Ajustar automaticamente com base na largura da tela */
-    }
-
-    #data,
-    #semanaNo {
-      display: block;
-      color: #d3d3d3;
-      margin: 0;
-      white-space: nowrap;
-      text-align: center;
-      font-size: calc(100vw / 25); /* Também ajustável com base na largura da tela */
+      font-size: 12vw; /* Aumentar o tamanho da hora */
     }
   </style>
 
