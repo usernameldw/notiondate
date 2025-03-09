@@ -9,7 +9,6 @@
     <title>Cabeçalho</title>
 
     <style>
-
       body {
         background-color: #191919;
         margin: 0;
@@ -19,33 +18,42 @@
         height: 100vh;
         font-family: sans-serif;
         color: #d3d3d3;
+        overflow: hidden;
       }
 
       #relógio {
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
         text-align: center;
         width: 100vw;
         height: 100vh;
-        font-size: 10vw; /* Tamanho da fonte responsivo que se ajusta com a largura da viewport */
         overflow: hidden;
       }
 
       #horaNo {
-        font-size: 1em; /* Tamanho ajustado com base na largura da viewport */
+        font-size: 20vw; /* Ajuste a fonte para ocupar horizontalmente a tela */
         font-weight: normal;
+        line-height: 1; /* Remover espaçamento extra entre as linhas */
+        margin: 0;
+        padding: 0;
+        white-space: nowrap; /* Evitar que o texto quebre para a próxima linha */
       }
 
       #data {
-        font-size: 0.4em; /* Um pouco menor que o horário */
+        font-size: 5vw; /* Ajuste menor para a data */
         font-weight: bold;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
       }
 
       #semanaNo {
-        font-size: 0.3em; /* Ajustado para ser ainda menor */
+        font-size: 4vw; /* Ajuste menor para a semana */
         font-weight: bold;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
       }
 
     </style>
@@ -55,7 +63,9 @@
   <body>
 
     <div id="relógio">
-      <div id="data-tempo"></div>
+      <div id="horaNo"></div>
+      <div id="data"></div>
+      <div id="semanaNo"></div>
     </div>
 
     <script>
@@ -98,11 +108,10 @@
           const semanaNo = new Date().getWeekNumber() + "ª " + " semana, " + semanaLista[semana];
 
           // imprimir data e hora atuais para o DOM
-          document.getElementById('data-tempo').innerHTML = `
-            <div id="horaNo">${horaNo}</div>
-            <div id="data">${data}</div>
-            <div id="semanaNo">${semanaNo}</div>
-          `;
+          document.getElementById('horaNo').innerHTML = horaNo;
+          document.getElementById('data').innerHTML = data;
+          document.getElementById('semanaNo').innerHTML = semanaNo;
+
           setTimeout(relógio, 1000);
         }
       });
