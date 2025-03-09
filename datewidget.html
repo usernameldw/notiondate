@@ -2,7 +2,6 @@
 <html lang="pt">
 
   <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -16,9 +15,8 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        font-family: sans-serif;
-        color: #d3d3d3;
         overflow: hidden;
+        font-family: sans-serif;
       }
 
       #relógio {
@@ -28,34 +26,38 @@
         text-align: center;
         width: 100vw;
         height: 100vh;
-        overflow: hidden;
       }
 
       #horaNo {
-        font-size: 20vw; /* Ajuste a fonte para ocupar horizontalmente a tela */
+        font-size: 20vw; /* Tamanho inicial ajustável */
         font-weight: normal;
-        line-height: 1; /* Remover espaçamento extra entre as linhas */
         margin: 0;
-        padding: 0;
-        white-space: nowrap; /* Evitar que o texto quebre para a próxima linha */
+        white-space: nowrap; /* Para impedir quebra de linha */
+        color: #d3d3d3;
       }
 
       #data {
-        font-size: 5vw; /* Ajuste menor para a data */
+        font-size: 6vw; /* Ajustar a fonte da data */
         font-weight: bold;
         margin: 0;
-        padding: 0;
+        color: #d3d3d3;
         white-space: nowrap;
       }
 
       #semanaNo {
-        font-size: 4vw; /* Ajuste menor para a semana */
+        font-size: 5vw; /* Ajustar a fonte da semana */
         font-weight: bold;
         margin: 0;
-        padding: 0;
+        color: #d3d3d3;
         white-space: nowrap;
       }
-
+      
+      /* Ajusta a fonte da hora automaticamente para atingir borda a borda */
+      @media screen and (max-width: 800px) {
+        #horaNo {
+          font-size: 25vw; /* Ajustar para telas menores */
+        }
+      }
     </style>
 
   </head>
